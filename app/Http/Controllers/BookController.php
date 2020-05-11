@@ -15,7 +15,14 @@ class BookController extends Controller
     public function index()
     {
         $books = new Book();
-        return response()->json($books->getAll());
+        if (request()->has('page') && request()->has('limit')) {
+            $pageNumber = request()->page;
+            $limitNumber = request()->limit;
+            return response()->json($books->getLimit($pageNumber, $limitNumber));
+        } else {
+            return response()->json($books->getAll());
+        }
+
     }
 
     /**
@@ -25,24 +32,25 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $books = new Book();
+        return response()->json($books->AddBook());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -54,7 +62,7 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -65,8 +73,8 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -77,11 +85,18 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
     }
+
+    public function getAllBook()
+    {
+        $allbooks = new Book();
+        return response()->json($allbooks->CountBook());
+    }
+
 }

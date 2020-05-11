@@ -17,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
+Route::get('book/count','BookController@getAllBook');
+Route::get('book/add','BookController@create');
 Route::apiResource('book', 'BookController');
 
