@@ -2,11 +2,12 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 class Book extends Model
 {
-protected $table='book';
+    protected $table='book';
     function getAll(){
         $book= DB::table('book')
             ->select('*')
@@ -30,10 +31,16 @@ protected $table='book';
             ->get();
         return $book;
     }
-    function AddBook(){
-         return DB::table('book')->insert(array(
-            array('namebook' => 'book6', 'author' => 'tientv','description'=>'tientv vs Book6','publication_date'=>'2020-05-11'),
-            array('namebook' => 'book7', 'author' => 'hoangha','description'=>'hoangha vs Book7','publication_date'=>'2020-06-11'),
-        ));
+    function addBook($data){
+        $book = new Book();
+        $book->namebook= $data->namebook;
+        $book->author= $data->author;
+        $book->description= $data->description;
+        $book->publication_date= $data->publication_date;
+        $book->save();
+//
+//         return DB::table('book')->insert([
+//             ['namebook' => $data->namebook, 'author' => $data->author,'description'=>$data->description,'publication_date'=>$data->publication_date],
+//         ]);
     }
 }

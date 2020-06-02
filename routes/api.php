@@ -18,6 +18,6 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 Route::get('book/count','BookController@getAllBook');
-Route::get('book/add','BookController@create');
+/*Route::get('book/add','BookController@create')*/;
 Route::apiResource('book', 'BookController');
 
