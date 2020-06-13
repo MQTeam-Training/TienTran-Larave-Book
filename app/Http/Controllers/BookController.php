@@ -82,9 +82,13 @@ class BookController extends Controller
     public function update(Request $request, $id)
     {
         //
-                $book = new Book();
-        $books = $book->addBook($request);
-        return response()->json(['status'=>'success','mess'=>$request->all()],Response::HTTP_OK);
+        $book = Book::findOrFail($id);
+        $book->namebook =$request->namebook;
+        $book->author =$request->author;
+        $book->description =$request->description;
+        $book->publication_date =$request->publication_date;
+        $book->save();
+        return response()->json(['status'=>'success'],Response::HTTP_OK);
     }
 
     /**
