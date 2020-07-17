@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 //});
 Route::get('book/count','BookController@getAllBook');
 /*Route::get('book/add','BookController@create')*/;
-Route::apiResource('book', 'BookController')->middleware('auth.jwt');
+Route::apiResource('book', 'BookController');
 Route::post('login', 'UserController@login');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
