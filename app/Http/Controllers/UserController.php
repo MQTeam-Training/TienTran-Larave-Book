@@ -60,11 +60,12 @@ class UserController extends Controller
             ], 500);
         }
     }
-    public function index()
+    public function getUser()
     {
-        $users = User::all();
-
-        return response()->json($users, 200);
+        return  response()->json([
+            'user' => auth()->user(),
+            'message' => 'getUser info '
+        ], 200);
     }
 
 }

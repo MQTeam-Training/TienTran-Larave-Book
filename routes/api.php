@@ -23,6 +23,6 @@ Route::apiResource('book', 'BookController')->middleware('auth.jwt');
 Route::post('login', 'UserController@login');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
-    Route::get('logout', 'UserController@logout');
-    Route::get('users', 'UserController@index');
+    Route::post('logout', 'UserController@logout');
+    Route::get('user', 'UserController@getUser');
 });
